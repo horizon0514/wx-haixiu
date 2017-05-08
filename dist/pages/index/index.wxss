@@ -1,14 +1,8 @@
-.section{
+.section {
   flex: 1;
   justify-content: center;
 }
 .title {
   font-size: 30rpx;
   flex: 1;
-}
-
-.info{
-  image{
-
-  }
 }

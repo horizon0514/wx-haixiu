@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["pages/demo/demo.xml"],"sourcesContent":["<view class=\"container\">\n  <text class=\"title\">{{ title }}</text>\n</view>\n"],"file":"demo.wxml"}

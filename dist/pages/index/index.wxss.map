@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/index/index.less"],"names":[],"mappings":"AAAA;EACE,OAAA;EACA,uBAAA;;AAEF;EACE,gBAAA;EACA,OAAA","sourcesContent":[".section{\n  flex: 1;\n  justify-content: center;\n}\n.title {\n  font-size: 30rpx;\n  flex: 1;\n}\n\n.info{\n  image{\n\n  }\n}\n"],"file":"index.wxss"}

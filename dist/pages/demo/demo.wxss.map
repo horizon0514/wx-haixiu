@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/demo/demo.less"],"names":[],"mappings":"AAAA;EACE,gBAAA","sourcesContent":[".title {\n  font-size: 40rpx;\n}\n"],"file":"demo.wxss"}

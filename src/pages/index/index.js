@@ -8,7 +8,8 @@ Page({
    */
   data: {
     title: 'Index page',
-    userInfo: {}
+    userInfo: {},
+    topics: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -19,6 +20,28 @@ Page({
     app.getUserInfo()
       .then(info => this.setData({ userInfo: info }))
       .catch(console.info)
+
+    this.fetchData();
+
+  },
+  /**
+   * 获取图片列表
+   * @return Array
+   */
+  fetchData () {
+    const self = this;
+    wx.request({
+      url: 'https://haixiu.huangsy.me/api/topics?start=0&limit=10',
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        console.log(res)
+        self.setData({
+          topics: res.data.docs
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
