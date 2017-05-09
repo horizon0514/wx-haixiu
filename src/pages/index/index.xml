@@ -1,8 +1,16 @@
 <view class="container">
-	<view class="section" wx:for="{{topics}}" wx:for-item="topic">
-	  <text class="title">{{ topic.title }}</text>
-	  <view class="info" wx:for="{{topic.imgs}}" wx:for-item="img">
-	  	<image style="background-color: #eeeeee;" mode="widthFix" src="{{img}}"></image>
-	  </view>
+	<view class="content">
+		<view class="section" wx:for="{{topics}}" wx:for-item="topic">
+		  <text class="title">{{ topic.title }}</text>
+		  <view class="info" wx:for="{{topic.imgs}}" wx:for-item="img">
+		  	<image style="background-color: #eeeeee;" mode="widthFix" src="{{img}}"></image>
+		  </view>
+		</view>
+	</view>
+	<view class="section bottom">
+		<view class="btn-area">
+			<image size="mini" src="https://gw.alicdn.com/tfs/TB1yndZRXXXXXXUXpXXXXXXXXXX-200-200.png" bindtap="fetchPre"></image>
+			<image size="mini" src="https://gw.alicdn.com/tfs/TB1K.xJRXXXXXceXFXXXXXXXXXX-200-200.png" bindtap="fetchNext"></image>
+		</view>
 	</view>
 </view>

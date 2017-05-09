@@ -11,6 +11,7 @@ Page({
   data: {
     title: 'Index page',
     userInfo: {},
+    currentPage: 0,
     topics: []
   },
   /**
@@ -24,7 +25,6 @@ Page({
     app.getUserInfo().then(function (info) {
       return _this.setData({ userInfo: info });
     }).catch(console.info);
-
     this.fetchData();
   },
 
@@ -34,18 +34,49 @@ Page({
    */
   fetchData: function fetchData() {
     var self = this;
+    var limit = 10;
+    var start = self.data.currentPage * limit;
+
+    wx.showLoading({
+      title: '害羞ing'
+    });
     wx.request({
-      url: 'https://haixiu.huangsy.me/api/topics?start=0&limit=10',
+      url: 'https://haixiu.huangsy.me/api/topics?start=' + start + '&limit=' + limit,
       header: {
         'content-type': 'application/json'
       },
       success: function success(res) {
-        console.log(res);
+        wx.hideLoading();
         self.setData({
           topics: res.data.docs
         });
+      },
+      fail: function fail(err) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络异常',
+          duration: 2000
+        });
       }
+
     });
+  },
+  fetchPre: function fetchPre() {
+    var self = this;
+    if (self.data.currentPage > 0) {
+      self.setData({
+        currentPage: self.data.currentPage - 1
+      });
+      self.fetchData();
+    }
+  },
+  fetchNext: function fetchNext() {
+    console.log('next');
+    var self = this;
+    self.setData({
+      currentPage: self.data.currentPage + 1
+    });
+    self.fetchData();
   },
 
   /**

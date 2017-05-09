@@ -9,6 +9,7 @@ Page({
   data: {
     title: 'Index page',
     userInfo: {},
+    currentPage: 0,
     topics: []
   },
   /**
@@ -20,28 +21,57 @@ Page({
     app.getUserInfo()
       .then(info => this.setData({ userInfo: info }))
       .catch(console.info)
-
-    this.fetchData();
-
+    this.fetchData()
   },
   /**
    * 获取图片列表
    * @return Array
    */
   fetchData () {
-    const self = this;
+    const self = this
+    const limit = 10
+    const start = self.data.currentPage * limit
+
+    wx.showLoading({
+      title: '害羞ing'
+    })
     wx.request({
-      url: 'https://haixiu.huangsy.me/api/topics?start=0&limit=10',
+      url: `https://haixiu.huangsy.me/api/topics?start=${start}&limit=${limit}`,
       header: {
-          'content-type': 'application/json'
+        'content-type': 'application/json'
       },
-      success: function(res) {
-        console.log(res)
+      success: function (res) {
+        wx.hideLoading()
         self.setData({
           topics: res.data.docs
         })
+      },
+      fail: function (err) {
+        wx.hideLoading()
+        wx.showToast({
+          title: '网络异常',
+          duration: 2000
+        })
       }
+
     })
+  },
+  fetchPre () {
+    const self = this
+    if(self.data.currentPage>0) {
+      self.setData({
+        currentPage: self.data.currentPage - 1
+      })
+      self.fetchData()
+    } 
+  },
+  fetchNext () {
+    console.log('next')
+    const self = this
+    self.setData({
+      currentPage: self.data.currentPage + 1
+    })
+    self.fetchData()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
